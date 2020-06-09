@@ -3,11 +3,14 @@ package com.example.quizapplevel;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -59,6 +62,20 @@ public class QuizAcivity extends AppCompatActivity {
         Collections.shuffle(questionList);
 
         showNextQuestion();
+        buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!answered){
+                    if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked()){
+                        checkAnswer();
+                    }else {
+                        Toast.makeText(QuizAcivity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    showNextQuestion();
+                }
+            }
+        });
 
     }
 
@@ -90,7 +107,54 @@ public class QuizAcivity extends AppCompatActivity {
 
     }
 
+    private void checkAnswer(){
+        answered = true;
+        RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
+        int answerNr = rbGroup.indexOfChild(rbSelected) + 1;
+
+        if(answerNr == currentQuestion.getAnswerNr()){
+            score++;
+            textViewScore.setText("Score: " + score);
+
+        }
+
+        showSolution();
+
+    }
+
+    private void showSolution() {
+        rb1.setTextColor(Color.RED);
+        rb2.setTextColor(Color.RED);
+        rb3.setTextColor(Color.RED);
+        switch (currentQuestion.getAnswerNr()) {
+            case 1:
+                rb1.setTextColor(Color.GREEN);
+                textViewQuestion.setText("Answer 1 is correct");
+                break;
+            case 2:
+                rb2.setTextColor(Color.GREEN);
+                textViewQuestion.setText("Answer 2 is correct");
+                break;
+            case 3:
+                rb3.setTextColor(Color.GREEN);
+                textViewQuestion.setText("Answer 3 is correct");
+                break;
+        }
+        if (questionCounter <= questionCountTotal) {
+            buttonConfirmNext.setText("Next");
+        } else buttonConfirmNext.setText("Finnish");
+
+
+
+
+    }
+
+
+   
+
     private void finishQuiz(){
         finish();
     }
+
+
 }
