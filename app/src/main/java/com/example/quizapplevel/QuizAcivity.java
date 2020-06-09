@@ -68,7 +68,7 @@ public class QuizAcivity extends AppCompatActivity {
         rb3.setTextColor(textColorDefaultRb);
         rbGroup.clearCheck();
 
-        if(questionCountTotal < questionCountTotal){
+        if(questionCounter < questionCountTotal){
             currentQuestion = questionList.get(questionCounter);
 
             textViewQuestion.setText(currentQuestion.getQuestion());
