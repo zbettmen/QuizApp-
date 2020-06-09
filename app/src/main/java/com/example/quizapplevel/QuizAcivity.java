@@ -2,12 +2,14 @@ package com.example.quizapplevel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class QuizAcivity extends AppCompatActivity {
@@ -22,7 +24,16 @@ public class QuizAcivity extends AppCompatActivity {
     private RadioButton rb3;
     private Button buttonConfirmNext;
 
+    private ColorStateList textColorDefaultRb;
+
+
     private List<Question> questionList;
+    private int questionCounter;
+    private int questionCountTotal;
+    private Question currentQuestion;
+    private int score;
+    private boolean answered;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +49,48 @@ public class QuizAcivity extends AppCompatActivity {
         rb2 = findViewById(R.id.radio_button2);
         rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
+
+        textColorDefaultRb = rb1.getTextColors();
+
+
         QuizdbHelper dbHelper = new QuizdbHelper(this);
         questionList = dbHelper.getAllQuestions();
+        questionCountTotal = questionList.size();
+        Collections.shuffle(questionList);
 
+        showNextQuestion();
+
+    }
+
+    private void showNextQuestion(){
+        rb1.setTextColor(textColorDefaultRb);
+        rb2.setTextColor(textColorDefaultRb);
+        rb3.setTextColor(textColorDefaultRb);
+        rbGroup.clearCheck();
+
+        if(questionCountTotal < questionCountTotal){
+            currentQuestion = questionList.get(questionCounter);
+
+            textViewQuestion.setText(currentQuestion.getQuestion());
+            rb1.setText(currentQuestion.getOption1());
+            rb2.setText(currentQuestion.getOption2());
+            rb3.setText(currentQuestion.getOption3());
+
+            questionCounter++;
+            textViewQuestionCount.setText("Question: " + questionCounter + "/ " + questionCountTotal);
+            answered = false;
+            buttonConfirmNext.setText("Confirm");
+
+
+
+        }else {
+            finishQuiz();
+
+        }
+
+    }
+
+    private void finishQuiz(){
+        finish();
     }
 }
