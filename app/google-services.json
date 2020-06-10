@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "878167367179",
+    "firebase_url": "https://quizapplevelsavepictures.firebaseio.com",
+    "project_id": "quizapplevelsavepictures",
+    "storage_bucket": "quizapplevelsavepictures.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878167367179:android:c76cbfa0faee55203f310e",
+        "android_client_info": {
+          "package_name": "com.example.quizapplevel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878167367179-d2v1fo7dmue9hrs1q2thsqmes6sg6pjf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYw3tNdFEj3EMB5eXHIpSrbHxm8AH7tBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878167367179-d2v1fo7dmue9hrs1q2thsqmes6sg6pjf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

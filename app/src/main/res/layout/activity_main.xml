@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:padding="16dp"
-    tools:context=".StartActivity">
+    tools:context=".StartActivity"
+    tools:ignore="ExtraText">
 
     <TextView
         android:id="@+id/text_view_highscore"
@@ -26,10 +27,22 @@
         android:layout_marginTop="30dp"
         android:text="LevelApp"/>
 
-<Button
-    android:id="@+id/button_start_quiz"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Start quiz"
-    android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/firebase_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button_start_quiz"
+        android:layout_alignBottom="@+id/button_start_quiz"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="-131dp"
+        android:text="Firebase" />
+
+    <Button
+        android:id="@+id/button_start_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Start quiz" />
+
 </RelativeLayout>

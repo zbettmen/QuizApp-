@@ -22,7 +22,6 @@ public class QuizdbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        this.db = db;
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
                 QuestionsTable.TABLE_NAME + " ( " +
                 QuestionsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -62,7 +61,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
 
     public List<Question> getAllQuestions() {
         List<Question> questionList = new ArrayList<>();
-        db = getReadableDatabase();
+        db = getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
         if (c.moveToFirst()) {
             do {

@@ -2,6 +2,9 @@ package com.example.quizapplevel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,9 +19,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuizAcivity extends AppCompatActivity {
-
+    public static final String EXTRA_SCORE = "extraScore";
     private TextView textViewQuestion;
-    private TextView textViewScore;
+    public  TextView textViewScore;
     private TextView textViewQuestionCount;
     private TextView textViewCountDown;
     private RadioGroup rbGroup;
@@ -26,6 +29,7 @@ public class QuizAcivity extends AppCompatActivity {
     private RadioButton rb2;
     private RadioButton rb3;
     private Button buttonConfirmNext;
+    public TextView highscore;
 
     private ColorStateList textColorDefaultRb;
 
@@ -42,6 +46,7 @@ public class QuizAcivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_acivity);
+
 
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewScore = findViewById(R.id.text_view_score);
@@ -79,7 +84,7 @@ public class QuizAcivity extends AppCompatActivity {
 
     }
 
-    private void showNextQuestion(){
+    public void showNextQuestion(){
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);
         rb3.setTextColor(textColorDefaultRb);
@@ -150,11 +155,16 @@ public class QuizAcivity extends AppCompatActivity {
     }
 
 
-   
 
-    private void finishQuiz(){
+
+    public void finishQuiz(){
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(EXTRA_SCORE,score);
+        setResult(RESULT_OK,resultIntent);
         finish();
     }
+
+
 
 
 }
