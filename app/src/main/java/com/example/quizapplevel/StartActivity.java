@@ -7,14 +7,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class StartActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_QUIZ = 1;
+    public static final String CATEGORIES_ITEMS = "Items";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String KEY_HIGHSCORE = "keyHighscore";
+
+    private Spinner spinner;
 
 
     private TextView textViewHighscore;
@@ -25,6 +30,13 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textViewHighscore = findViewById(R.id.text_view_highscore);
+        spinner = findViewById(R.id.spinner_categories);
+
+        String[] categories = Question.getAllDifficultyLevels();
+        ArrayAdapter<String> items = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories);
+        items.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(items);
+
         loadHighscore();
         Button buttonStartQuiz = findViewById(R.id.button_start_quiz);
         buttonStartQuiz.setOnClickListener(new View.OnClickListener() {
@@ -34,20 +46,14 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        Button startFirebase = findViewById(R.id.firebase_button);
-        startFirebase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
-
 
     }
     public void startQuiz(){
+
+        String items = spinner.getSelectedItem().toString();
+
         Intent intent = new Intent(this, QuizAcivity.class);
+        intent.putExtra(CATEGORIES_ITEMS,items);
         startActivityForResult(intent,REQUEST_CODE_QUIZ);
     }
 

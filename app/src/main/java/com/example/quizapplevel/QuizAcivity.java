@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class QuizAcivity extends AppCompatActivity {
     private TextView textViewQuestion;
     public  TextView textViewScore;
     private TextView textViewQuestionCount;
+    private TextView textViewCategory;
     private TextView textViewCountDown;
     private RadioGroup rbGroup;
     private RadioButton rb1;
@@ -51,6 +53,7 @@ public class QuizAcivity extends AppCompatActivity {
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewScore = findViewById(R.id.text_view_score);
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
+        textViewCategory = findViewById(R.id.text_view_question_category);
         textViewCountDown = findViewById(R.id.text_view_countdown);
         rbGroup = findViewById(R.id.radio_group);
         rb1 = findViewById(R.id.radio_button1);
@@ -60,9 +63,13 @@ public class QuizAcivity extends AppCompatActivity {
 
         textColorDefaultRb = rb1.getTextColors();
 
+        Intent intent = getIntent();
+        String items = intent.getStringExtra(StartActivity.CATEGORIES_ITEMS);
+
+        textViewCategory.setText("Category" + items);
 
         QuizdbHelper dbHelper = new QuizdbHelper(this);
-        questionList = dbHelper.getAllQuestions();
+        questionList = dbHelper.getQuestions(items);
         questionCountTotal = questionList.size();
         Collections.shuffle(questionList);
 
@@ -154,7 +161,7 @@ public class QuizAcivity extends AppCompatActivity {
 
     }
 
-
+   
 
 
     public void finishQuiz(){
