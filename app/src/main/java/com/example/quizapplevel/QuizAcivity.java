@@ -2,9 +2,10 @@ package com.example.quizapplevel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+
+
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.URL;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class QuizAcivity extends AppCompatActivity {
     private boolean answered;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,6 @@ public class QuizAcivity extends AppCompatActivity {
         textViewScore = findViewById(R.id.text_view_score);
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
         textViewCategory = findViewById(R.id.text_view_question_category);
-        textViewCountDown = findViewById(R.id.text_view_countdown);
         rbGroup = findViewById(R.id.radio_group);
         rb1 = findViewById(R.id.radio_button1);
         rb2 = findViewById(R.id.radio_button2);
@@ -161,7 +162,7 @@ public class QuizAcivity extends AppCompatActivity {
 
     }
 
-   
+
 
 
     public void finishQuiz(){

@@ -41,23 +41,26 @@ public class QuizdbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     private void fillQuestionsTable() {
-        Question q1 = new Question("Easy: A is correct",
-                "A", "B", "C", 1, Question.DIFFICULTY_MATH);
+        Question q1 = new Question("2 + 2 is?: ",
+                "1", "2", "4", 3, Question.DIFFICULTY_MATH);
         addQuestion(q1);
-        Question q2 = new Question("Medium: B is correct",
-                "A", "B", "C", 2, Question.DIFFICULTY_BIOLOGY);
+        Question q7 = new Question("64 * 5 is?: ",
+                "124", "320", "64", 2, Question.DIFFICULTY_MATH);
+        addQuestion(q7);
+        Question q2 = new Question("The largest snake on Earth",
+                "Python", "Anaconda", "Cobra", 2, Question.DIFFICULTY_BIOLOGY);
         addQuestion(q2);
-        Question q3 = new Question("Medium: C is correct",
-                "A", "B", "C", 3, Question.DIFFICULTY_BIOLOGY);
+        Question q3 = new Question("3 + 3 + 3 + 3 + 3 + 3 is?" ,
+                "20", "25", "18", 3, Question.DIFFICULTY_MATH);
         addQuestion(q3);
-        Question q4 = new Question("Hard: A is correct",
-                "A", "B", "C", 1, Question.DIFFICULTY_CITY);
+        Question q4 = new Question("Capital City in Bosnia is?",
+                "Stockholm", "Sarajevo", "Berlin", 2, Question.DIFFICULTY_CITY);
         addQuestion(q4);
-        Question q5 = new Question("Hard: B is correct",
-                "A", "B", "C", 2, Question.DIFFICULTY_CITY);
+        Question q5 = new Question("Largest Cities by Population",
+                "Tokyo", "Peking", "New York", 3, Question.DIFFICULTY_CITY);
         addQuestion(q5);
-        Question q6 = new Question("Hard: C is correct",
-                "A", "B", "C", 3, Question.DIFFICULTY_CITY);
+        Question q6 = new Question("How many bones does an adult human have?",
+                "206", "60", "128", 1, Question.DIFFICULTY_BIOLOGY);
         addQuestion(q6);
     }
     private void addQuestion(Question question) {
