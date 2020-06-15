@@ -2,15 +2,9 @@ package com.example.quizapplevel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,29 +15,41 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 public class Jdata extends AppCompatActivity {
-        private TextView showI;
-        private TextView shows;
-        private Button seeInfo;
+        private TextView showTemp;
+        private TextView showP;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jdata);
-        shows = findViewById(R.id.textview_s);
-        showI = findViewById(R.id.show_info);
-        seeInfo = findViewById(R.id.button_show);
-        seeInfo.setOnClickListener(new View.OnClickListener() {
+
+        showTemp = findViewById(R.id.r_button1);
+        showP = findViewById(R.id.r_button2);
+        showTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getWeather();
+                if(!getWeather()){
+                    
+                }
+            }
+
+        });
+
+        showP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!getWeather())
             }
         });
+
+
     }
 
-    public void getWeather() {
+    public boolean getWeather() {
         try {
             DownloadTask task = new DownloadTask();
 
@@ -55,6 +61,7 @@ public class Jdata extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),"Could not find ",Toast.LENGTH_SHORT).show();
         }
+        return false;
     }
 
 
@@ -111,10 +118,12 @@ public class Jdata extends AppCompatActivity {
                     String main = jsonPart.getString("main");
                     String description = jsonPart.getString("description");
 
+
                         message += main + ": " + description +  "\r\n";
                 }
-                    showI.setText(mainData.getString("temp"));
-                    shows.setText(message);
+                    showTemp.setText(mainData.getString("temp"));
+                    showP.setText(mainData.getString("pressure"));
+                    //shows.setText(message);
 
             } catch (Exception e) {
 
