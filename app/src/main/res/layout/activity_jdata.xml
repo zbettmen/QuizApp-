@@ -1,64 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Jdata">
+    tools:context=".Jdata"
+    android:orientation="horizontal">
 
-  <TextView
-      android:id="@+id/cunt"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="London"
-      android:textStyle="bold"
-      android:textSize="50dp"
-      android:layout_marginTop="90dp"
-      android:layout_centerHorizontal="true"/>
-<ImageView
-    android:id="@+id/image_sunny"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginTop="20dp"
-    android:src="@drawable/sunny"
-    android:layout_below="@+id/cunt"/>
-  
-  <TextView
-    android:id="@+id/temp_tem"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:textSize="50sp"
-      android:textStyle="bold"
-      android:layout_marginTop="20dp"
-      android:layout_below="@id/image_sunny"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:orientation="horizontal" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
+        </LinearLayout>
 
-   <RadioButton
-       android:id="@+id/r_button1"
-       android:text="Temp:"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_centerHorizontal="true"
-       android:layout_below="@+id/temp_tem"
-       android:layout_marginTop="30dp"
-       android:button="@drawable/check_box"/>
-  <RadioButton
-      android:id="@+id/r_button2"
-      android:text="Pressure:"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:layout_below="@+id/r_button1"
-      android:layout_marginTop="50dp"
-      android:button="@drawable/check_box"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/sunny"
+
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="60dp"
+                android:src="@drawable/sunny" />
 
 
+        </LinearLayout>
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Great"
+                android:textSize="24dp" />
+
+
+            <TextView
+                android:id="@+id/temp_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="40dp"
+                android:text="Temp:" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Location"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/button_test"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:text="test" />
+
+            <TextView
+
+                android:id="@+id/date_text"
+                android:layout_width="164dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginBottom="30dp"
+                android:textSize="16dp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="10dp">
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+         
+
+        
+
+    </LinearLayout>
+
+
+
+
 
 
 

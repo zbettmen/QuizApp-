@@ -5,20 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class Jdata extends AppCompatActivity {
+        private Button test;
+        private TextView country;
+        private TextView locations;
         private TextView showTemp;
-        private TextView showP;
+        private TextView dates;
+
 
 
 
@@ -26,23 +36,18 @@ public class Jdata extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jdata);
+        dates = findViewById(R.id.date_text);
+            country = findViewById(R.id.country);
+            locations = findViewById(R.id.location);
+           showTemp = findViewById(R.id.temp_text);
 
-        showTemp = findViewById(R.id.r_button1);
-        showP = findViewById(R.id.r_button2);
-        showTemp.setOnClickListener(new View.OnClickListener() {
+        test = findViewById(R.id.button_test);
+        test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!getWeather()){
-                    
-                }
-            }
+                getWeather();
+                getDate();
 
-        });
-
-        showP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!getWeather())
             }
         });
 
@@ -104,26 +109,21 @@ public class Jdata extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
 
-                String weatherInfo = jsonObject.getString("weather");
+                    String locat = jsonObject.getString("name");
 
 
-                    JSONObject mainData = jsonObject.getJSONObject("main");
-                    JSONArray arr = new JSONArray(weatherInfo);
+                    JSONObject maData = jsonObject.getJSONObject("main");
+                    JSONObject mainData = jsonObject.getJSONObject("sys");
 
-                String message = "";
+                    country.setText(mainData.getString("country"));
 
-                for (int i=0; i < arr.length(); i++) {
-                    JSONObject jsonPart = arr.getJSONObject(i);
-
-                    String main = jsonPart.getString("main");
-                    String description = jsonPart.getString("description");
+                    locations.setText(locat);
+                    showTemp.setText(maData.getString("temp"));
 
 
-                        message += main + ": " + description +  "\r\n";
-                }
-                    showTemp.setText(mainData.getString("temp"));
-                    showP.setText(mainData.getString("pressure"));
-                    //shows.setText(message);
+
+
+
 
             } catch (Exception e) {
 
@@ -133,6 +133,14 @@ public class Jdata extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void getDate(){
+        Calendar calendar = Calendar.getInstance();
+        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        dates.setText(date);
+
+
     }
 }
 
