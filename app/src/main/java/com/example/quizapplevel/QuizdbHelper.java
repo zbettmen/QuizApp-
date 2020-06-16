@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class QuizdbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "MyAwsomeQuiz.db";
+    private static final String DATABASE_NAME = "MyQuizRH.db";
     private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase db;
     public QuizdbHelper(Context context) {
@@ -33,7 +33,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 QuestionsTable.COLUMN_CHOOSE + " TEXT" +
                 ")";
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
-        fillQuestionsTable();
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -63,6 +63,11 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 "206", "60", "128", 1, Question.DIFFICULTY_BIOLOGY);
         addQuestion(q6);
     }
+    private void fillMathQ(){
+        Question q1 = new Question("2 - 2 is?: ",
+                "1", "2", "4", 3, Question.DIFFICULTY_MATH);
+        addQuestion(q1);
+    }
     private void addQuestion(Question question) {
         ContentValues cv = new ContentValues();
         cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
@@ -73,25 +78,8 @@ public class QuizdbHelper extends SQLiteOpenHelper {
         cv.put(QuestionsTable.COLUMN_CHOOSE, question.getDifficulty());
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
-    public ArrayList<Question> getAllQuestions() {
-        ArrayList<Question> questionList = new ArrayList<>();
-        db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
-        if (c.moveToFirst()) {
-            do {
-                Question question = new Question();
-                question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
-                question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
-                question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
-                question.setOption3(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION3)));
-                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR)));
-                question.setDifficulty(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_CHOOSE)));
-                questionList.add(question);
-            } while (c.moveToNext());
-        }
-        c.close();
-        return questionList;
-    }
+
+
     public ArrayList<Question> getQuestions(String difficulty) {
         ArrayList<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();

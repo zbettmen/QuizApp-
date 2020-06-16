@@ -3,6 +3,7 @@ package com.example.quizapplevel;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -91,6 +92,7 @@ public class StartActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public void loadHighscore() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
