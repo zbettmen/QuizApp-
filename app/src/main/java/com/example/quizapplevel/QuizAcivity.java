@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuizAcivity extends AppCompatActivity {
+    private ImageView image_question;
     public static final String EXTRA_SCORE = "extraScore";
     private TextView textViewQuestion;
     public  TextView textViewScore;
@@ -50,7 +54,8 @@ public class QuizAcivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_acivity);
-
+        image_question = findViewById(R.id.image_question);
+        image_question.setVisibility(View.GONE);
 
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewScore = findViewById(R.id.text_view_score);
@@ -111,6 +116,14 @@ public class QuizAcivity extends AppCompatActivity {
             answered = false;
             buttonConfirmNext.setText("Confirm");
 
+            if(currentQuestion.isImage()){
+                image_question.setVisibility(View.VISIBLE);
+                textViewQuestion.setVisibility(View.GONE);
+                int id = Resources.getSystem().getIdentifier(currentQuestion.getImage(), "drawable", "android");
+                image_question.setImageResource(id);
+
+
+            }
 
 
         }else {

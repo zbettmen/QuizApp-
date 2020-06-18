@@ -1,5 +1,6 @@
 package com.example.quizapplevel;
 
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+
 
 public class StartActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_QUIZ = 1;
@@ -47,7 +50,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
         String[] categories = Question.getAllDifficultyLevels();
-        ArrayAdapter<String> items = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> items = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
         items.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(items);
 
@@ -109,6 +112,7 @@ public class StartActivity extends AppCompatActivity {
         editor.putInt(KEY_HIGHSCORE,highscore);
         editor.apply();
     }
+
 
 
 

@@ -74,6 +74,8 @@
             android:textStyle="bold" />
     </RadioGroup>
 
+
+
     <Button
         android:id="@+id/button_confirm_next"
         android:layout_width="match_parent"
@@ -81,5 +83,13 @@
         android:layout_below="@id/radio_group"
         android:layout_marginTop="16dp"
         android:text="Confirm" />
+
+    <ImageView
+        android:id="@+id/image_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radio_group"
+        android:layout_marginBottom="147dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>

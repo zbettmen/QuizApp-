@@ -1,31 +1,64 @@
 package com.example.quizapplevel;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+
 
 public class Question {
     public static final String DIFFICULTY_MATH = "MATH";
     public static final String DIFFICULTY_BIOLOGY = "BIOLOGY";
     public static final String DIFFICULTY_CITY = "CITY";
+    public static final String DIFFICULTY_HINT = "HINT";
     private String question;
     private String option1;
     private String option2;
     private String option3;
     private int answerNr;
     private String difficulty;
+    private String hint;
+    private String image;
+    private boolean isImage;
+
     public Question() {
     }
     public Question(String question, String option1, String option2,
-                    String option3, int answerNr, String difficulty) {
+                    String option3, int answerNr, String difficulty,String image,boolean isImage) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.answerNr = answerNr;
         this.difficulty = difficulty;
+        this.image = image;
+        this.isImage = isImage;
+
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isImage() {
+        return isImage;
+    }
+
+    public void setIsImage(boolean image) {
+        isImage = image;
+    }
+
+    public Question(String hint) {
+        this.hint = hint;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
 
     public String getQuestion() {
         return question;
@@ -71,7 +104,9 @@ public class Question {
         return new String[]{
                 DIFFICULTY_MATH,
                 DIFFICULTY_BIOLOGY,
-                DIFFICULTY_CITY
+                DIFFICULTY_CITY,
+                DIFFICULTY_HINT
+
         };
     }
 }

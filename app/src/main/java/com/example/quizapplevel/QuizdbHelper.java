@@ -21,6 +21,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         this.db = db;
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
                 QuestionsTable.TABLE_NAME + " ( " +
@@ -30,10 +31,13 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 QuestionsTable.COLUMN_OPTION2 + " TEXT, " +
                 QuestionsTable.COLUMN_OPTION3 + " TEXT, " +
                 QuestionsTable.COLUMN_ANSWER_NR + " INTEGER, " +
-                QuestionsTable.COLUMN_CHOOSE + " TEXT" +
+                QuestionsTable.COLUMN_CHOOSE + " TEXT," +
+                QuestionsTable.COLUMN_HINTS + " TEXT," +
+                QuestionsTable.COLUMN_IMAGE + " TEXT," +
+                QuestionsTable.COLUMN_ISIMAGE + " BOOLEAN" +
                 ")";
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
-
+            fillQuestionsTable();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -42,32 +46,10 @@ public class QuizdbHelper extends SQLiteOpenHelper {
     }
     private void fillQuestionsTable() {
         Question q1 = new Question("2 + 2 is?: ",
-                "1", "2", "4", 3, Question.DIFFICULTY_MATH);
-        addQuestion(q1);
-        Question q7 = new Question("64 * 5 is?: ",
-                "124", "320", "64", 2, Question.DIFFICULTY_MATH);
-        addQuestion(q7);
-        Question q2 = new Question("The largest snake on Earth",
-                "Python", "Anaconda", "Cobra", 2, Question.DIFFICULTY_BIOLOGY);
-        addQuestion(q2);
-        Question q3 = new Question("3 + 3 + 3 + 3 + 3 + 3 is?" ,
-                "20", "25", "18", 3, Question.DIFFICULTY_MATH);
-        addQuestion(q3);
-        Question q4 = new Question("Capital City in Bosnia is?",
-                "Stockholm", "Sarajevo", "Berlin", 2, Question.DIFFICULTY_CITY);
-        addQuestion(q4);
-        Question q5 = new Question("Largest Cities by Population",
-                "Tokyo", "Peking", "New York", 3, Question.DIFFICULTY_CITY);
-        addQuestion(q5);
-        Question q6 = new Question("How many bones does an adult human have?",
-                "206", "60", "128", 1, Question.DIFFICULTY_BIOLOGY);
-        addQuestion(q6);
+                "1", "2", "4", 3, Question.DIFFICULTY_MATH,"sunny",true);
+            addQuestion(q1);
     }
-    private void fillMathQ(){
-        Question q1 = new Question("2 - 2 is?: ",
-                "1", "2", "4", 3, Question.DIFFICULTY_MATH);
-        addQuestion(q1);
-    }
+
     private void addQuestion(Question question) {
         ContentValues cv = new ContentValues();
         cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
@@ -76,8 +58,16 @@ public class QuizdbHelper extends SQLiteOpenHelper {
         cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
         cv.put(QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
         cv.put(QuestionsTable.COLUMN_CHOOSE, question.getDifficulty());
+        cv.put(QuestionsTable.COLUMN_HINTS,question.getHint());
+        cv.put(QuestionsTable.COLUMN_IMAGE,question.getImage());
+        cv.put(QuestionsTable.COLUMN_ISIMAGE,question.isImage());
+
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
+
+
+
+
 
 
     public ArrayList<Question> getQuestions(String difficulty) {
@@ -95,6 +85,9 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 question.setOption3(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION3)));
                 question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR)));
                 question.setDifficulty(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_CHOOSE)));
+                question.setImage(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_IMAGE)));
+                question.setIsImage(Boolean.parseBoolean(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_ISIMAGE))));
+
                 questionList.add(question);
             } while (c.moveToNext());
         }
