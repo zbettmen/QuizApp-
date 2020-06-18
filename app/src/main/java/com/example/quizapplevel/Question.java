@@ -15,12 +15,12 @@ public class Question {
     private String difficulty;
     private String hint;
     private String image;
-    private boolean isImage;
+    private int isImage;
 
     public Question() {
     }
     public Question(String question, String option1, String option2,
-                    String option3, int answerNr, String difficulty,String image,boolean isImage) {
+                    String option3, int answerNr, String difficulty,String image,int isImage) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -40,11 +40,11 @@ public class Question {
         this.image = image;
     }
 
-    public boolean isImage() {
+    public int isImage() {
         return isImage;
     }
 
-    public void setIsImage(boolean image) {
+    public void setIsImage(int image) {
         isImage = image;
     }
 

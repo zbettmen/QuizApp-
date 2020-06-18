@@ -3,13 +3,11 @@ package com.example.quizapplevel;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -116,15 +114,18 @@ public class QuizAcivity extends AppCompatActivity {
             answered = false;
             buttonConfirmNext.setText("Confirm");
 
-            if(currentQuestion.isImage()){
+            if(currentQuestion.isImage() == 1){
                 image_question.setVisibility(View.VISIBLE);
                 textViewQuestion.setVisibility(View.GONE);
-                int id = Resources.getSystem().getIdentifier(currentQuestion.getImage(), "drawable", "android");
+                int id = getResourseId(QuizAcivity.this, currentQuestion.getImage(), "drawable", getPackageName());
+
                 image_question.setImageResource(id);
 
 
+            }else {
+                image_question.setVisibility(View.GONE);
+                textViewQuestion.setVisibility(View.VISIBLE);
             }
-
 
         }else {
             finishQuiz();
@@ -132,6 +133,15 @@ public class QuizAcivity extends AppCompatActivity {
         }
 
     }
+
+    public static int getResourseId(Context context, String pVariableName, String pResourcename, String pPackageName) throws RuntimeException {
+        try {
+            return context.getResources().getIdentifier(pVariableName, pResourcename, pPackageName);
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting Resource ID.", e);
+        }
+    }
+
 
     private void checkAnswer(){
         answered = true;
@@ -174,9 +184,6 @@ public class QuizAcivity extends AppCompatActivity {
 
 
     }
-
-
-
 
     public void finishQuiz(){
         Intent resultIntent = new Intent();

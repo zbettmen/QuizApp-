@@ -46,8 +46,16 @@ public class QuizdbHelper extends SQLiteOpenHelper {
     }
     private void fillQuestionsTable() {
         Question q1 = new Question("2 + 2 is?: ",
-                "1", "2", "4", 3, Question.DIFFICULTY_MATH,"sunny",true);
+                "1", "2", "4", 3, Question.DIFFICULTY_MATH,"sunny",1);
             addQuestion(q1);
+
+        Question q2 = new Question("2 + 2 is?: ",
+                "1", "2", "4", 3, Question.DIFFICULTY_MATH,"",0);
+        addQuestion(q2);
+
+
+
+
     }
 
     private void addQuestion(Question question) {
@@ -86,7 +94,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR)));
                 question.setDifficulty(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_CHOOSE)));
                 question.setImage(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_IMAGE)));
-                question.setIsImage(Boolean.parseBoolean(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_ISIMAGE))));
+                question.setIsImage(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ISIMAGE)));
 
                 questionList.add(question);
             } while (c.moveToNext());
