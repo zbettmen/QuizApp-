@@ -6,14 +6,14 @@ public class Question {
     public static final String DIFFICULTY_MATH = "MATH";
     public static final String DIFFICULTY_BIOLOGY = "BIOLOGY";
     public static final String DIFFICULTY_CITY = "CITY";
-    public static final String DIFFICULTY_HINT = "HINT";
+    public static final String DIFFICULTY_PICTURES = "PICTURES";
     private String question;
     private String option1;
     private String option2;
     private String option3;
     private int answerNr;
     private String difficulty;
-    private String hint;
+    private String pictures;
     private String image;
     private int isImage;
 
@@ -30,6 +30,16 @@ public class Question {
         this.image = image;
         this.isImage = isImage;
 
+
+
+    }
+
+    public String getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(String pictures) {
+        this.pictures = pictures;
     }
 
     public String getImage() {
@@ -48,17 +58,9 @@ public class Question {
         isImage = image;
     }
 
-    public Question(String hint) {
-        this.hint = hint;
-    }
 
-    public String getHint() {
-        return hint;
-    }
 
-    public void setHint(String hint) {
-        this.hint = hint;
-    }
+
 
     public String getQuestion() {
         return question;
@@ -105,7 +107,7 @@ public class Question {
                 DIFFICULTY_MATH,
                 DIFFICULTY_BIOLOGY,
                 DIFFICULTY_CITY,
-                DIFFICULTY_HINT
+                DIFFICULTY_PICTURES
 
         };
     }

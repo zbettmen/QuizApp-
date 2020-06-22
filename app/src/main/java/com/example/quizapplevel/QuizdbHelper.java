@@ -32,7 +32,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 QuestionsTable.COLUMN_OPTION3 + " TEXT, " +
                 QuestionsTable.COLUMN_ANSWER_NR + " INTEGER, " +
                 QuestionsTable.COLUMN_CHOOSE + " TEXT," +
-                QuestionsTable.COLUMN_HINTS + " TEXT," +
+                QuestionsTable.COLUMN_PICTURES + " TEXT," +
                 QuestionsTable.COLUMN_IMAGE + " TEXT," +
                 QuestionsTable.COLUMN_ISIMAGE + " BOOLEAN" +
                 ")";
@@ -45,13 +45,45 @@ public class QuizdbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     private void fillQuestionsTable() {
-        Question q1 = new Question("2 + 2 is?: ",
-                "1", "2", "4", 3, Question.DIFFICULTY_MATH,"sunny",1);
+        Question q1 = new Question("2 * 5 is?: ",
+                "1", "2", "10", 3, Question.DIFFICULTY_MATH,"",0);
             addQuestion(q1);
 
         Question q2 = new Question("2 + 2 is?: ",
                 "1", "2", "4", 3, Question.DIFFICULTY_MATH,"",0);
         addQuestion(q2);
+
+        Question q3 = new Question(" ",
+                "Bil Gates ", "Mona Lisa", "50 cent", 2, Question.DIFFICULTY_PICTURES,"monalisa",1);
+        addQuestion(q3);
+
+        Question q4 = new Question(" ",
+                "Bil Gates ", "Eminem", "Steve Jobs", 3, Question.DIFFICULTY_PICTURES,"steve",1);
+        addQuestion(q4);
+
+        Question q5 = new Question(" ",
+                "Zlatan ", "Ronaldo", "2pac", 1, Question.DIFFICULTY_PICTURES,"zlatan",1);
+        addQuestion(q5);
+
+        Question q6 = new Question(" ",
+                "Sarajevo ", "Berlin", "Stockholm", 1, Question.DIFFICULTY_CITY,"sarajevo",1);
+        addQuestion(q6);
+
+
+        Question q7 = new Question("Biggest city in the world by population ",
+                "Shanghai", "Tokyo", "New York", 3, Question.DIFFICULTY_CITY,"",0);
+        addQuestion(q7);
+
+
+        Question q8 = new Question("How many bones does an adult human have ",
+                "128", "60", "206", 3, Question.DIFFICULTY_BIOLOGY,"",0);
+        addQuestion(q8);
+
+        Question q9 = new Question("Biggest snake on earth  ",
+                "Anaconda", "Cobra", "Python", 3, Question.DIFFICULTY_BIOLOGY,"",0);
+        addQuestion(q9);
+
+
 
 
 
@@ -66,7 +98,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
         cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
         cv.put(QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
         cv.put(QuestionsTable.COLUMN_CHOOSE, question.getDifficulty());
-        cv.put(QuestionsTable.COLUMN_HINTS,question.getHint());
+        cv.put(QuestionsTable.COLUMN_PICTURES,question.getPictures());
         cv.put(QuestionsTable.COLUMN_IMAGE,question.getImage());
         cv.put(QuestionsTable.COLUMN_ISIMAGE,question.isImage());
 
@@ -98,8 +130,8 @@ public class QuizdbHelper extends SQLiteOpenHelper {
 
                 questionList.add(question);
             } while (c.moveToNext());
-        }
-        c.close();
+        } c.close();
+
         return questionList;
     }
 }
