@@ -34,7 +34,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
                 QuestionsTable.COLUMN_CHOOSE + " TEXT," +
                 QuestionsTable.COLUMN_PICTURES + " TEXT," +
                 QuestionsTable.COLUMN_IMAGE + " TEXT," +
-                QuestionsTable.COLUMN_ISIMAGE + " BOOLEAN" +
+                QuestionsTable.COLUMN_ISIMAGE + " INTEGER" +
                 ")";
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
             fillQuestionsTable();
@@ -116,7 +116,7 @@ public class QuizdbHelper extends SQLiteOpenHelper {
         String[] selectionArgs = new String[]{difficulty};
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME +
                 " WHERE " + QuestionsTable.COLUMN_CHOOSE + " = ?", selectionArgs);
-        if (c.moveToFirst()) {
+        if (c != null && c.moveToFirst()) {
             do {
                 Question question = new Question();
                 question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
